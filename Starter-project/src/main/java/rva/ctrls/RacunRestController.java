@@ -61,7 +61,7 @@ public class RacunRestController {
 		return racunRepository.findByKlijent(k);
 	}
 	
-	
+	//komentar
 	
 	@GetMapping("racun/{naziv}")
 	@ApiOperation(value = "Vraća kredit iz baze podataka čija je vrednost naziva prosledjena kao path varijabla")
