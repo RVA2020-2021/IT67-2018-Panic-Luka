@@ -15,10 +15,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import rva.jpa.Klijent;
 import rva.jpa.Racun;
 import rva.jpa.TipRacuna;
 import rva.repository.RacunRepository;
+import rva.repository.KlijentRepository;
 import rva.repository.TipRacunaRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -36,7 +37,7 @@ public class RacunRestController {
 	private RacunRepository racunRepository;
 	
 	@Autowired
-	private TipRacunaRepository tipRacunaRepository;
+	private KlijentRepository klijentRepository;
 	
 	@GetMapping("racun")
 	@ApiOperation(value = "Vraća kolekciju svih računa iz baze podataka")
@@ -53,12 +54,13 @@ public class RacunRestController {
 		return racunRepository.getOne(id);
 	}
 	
-	@GetMapping("racuniTipaRacunaId/{id}")
-	@ApiOperation(value = "Vraća račun iz baze podataka za prosledjenu id vrednost tipa računa")
-	public Collection<Racun> racuniZaTipRacunaId(@PathVariable("id") Integer id){
-		TipRacuna t = tipRacunaRepository.getOne(id);
-		return racunRepository.findByTipRacuna(t);
+	@GetMapping("racunKlijenta/{id}")
+	@ApiOperation(value = "Vraća račun iz baze podataka za prosledjenu id vrednost klijenta")
+	public Collection<Racun> racuniKlijenta(@PathVariable("id") Integer id){
+		Klijent k = klijentRepository.getOne(id);
+		return racunRepository.findByKlijent(k);
 	}
+	
 	
 	
 	@GetMapping("racun/{naziv}")
@@ -97,6 +99,7 @@ public class RacunRestController {
 
 		}
 		racunRepository.deleteById(id);
+		racunRepository.flush();
 		if(id == -100) {
 			jdbcTemplate.execute(
 					"INSERT INTO racun(\"id\", \"naziv\", \"oznaka\", \"opis\", \"tip_racuna\", \"klijent\" )"

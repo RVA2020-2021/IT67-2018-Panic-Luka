@@ -64,7 +64,7 @@ public class TipRacunaRestController {
 		
 	}
 	
-	@PutMapping("tipRacunaUpdate")
+	@PutMapping("tipRacuna")
 	@ApiOperation(value = "Modifikuje postojeći tip računa u bazi podataka")
 	public ResponseEntity<TipRacuna> updateTipRacuna(@RequestBody TipRacuna tipRacuna){
 		if(!tipRacunaRepository.existsById(tipRacuna.getId())) {
@@ -75,7 +75,7 @@ public class TipRacunaRestController {
 		return new ResponseEntity<TipRacuna>(HttpStatus.OK);
 	}
 	
-	@DeleteMapping("tipRacunaDelete/{id}")
+	@DeleteMapping("tipRacuna/{id}")
 	@ApiOperation(value = "Briše tip računa iz baze podataka čija je id vrednost prosledjena kao path varijabla")
 	public ResponseEntity<TipRacuna> deleteTipRacuna(@PathVariable("id") Integer id){
 		if(!tipRacunaRepository.existsById(id)) {
@@ -83,6 +83,7 @@ public class TipRacunaRestController {
 
 		}
 		tipRacunaRepository.deleteById(id);
+		tipRacunaRepository.flush();
 		if(id == -100)
 		{
 			jdbcTemplate.execute(
