@@ -1,5 +1,5 @@
-export const TIPRACUNA_URL = 'http://localhost:8083/tipRacuna';
-export const KREDIT_URL = 'http://localhost:8083/kredit'
-export const KLIJENT_URL = 'http://localhost:8083/klijent'
-export const RACUN_URL = 'http://localhost:8083/racun'
-export const RACUNI_KLIJENTA_URL = 'http://localhost:8083/racunKlijenta'
+export const TIPRACUNA_URL = 'https://rva-backend-luka.herokuapp.com/tipRacuna';
+export const KREDIT_URL = 'https://rva-backend-luka.herokuapp.com/kredit'
+export const KLIJENT_URL = 'https://rva-backend-luka.herokuapp.com/klijent'
+export const RACUN_URL = 'https://rva-backend-luka.herokuapp.com/racun'
+export const RACUNI_KLIJENTA_URL = 'https://rva-backend-luka.herokuapp.com/racunKlijenta'
